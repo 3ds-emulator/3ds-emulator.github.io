@@ -803,11 +803,98 @@ nav ul li a:hover::after, nav ul li a.active::after {
     color: var(--text-dark);
 }
 
+/* FAQ Section */
+.faq-section {
+    background-color: var(--background-light);
+    position: relative;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.faq-item {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-question {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+    color: var(--primary-color);
+}
+
+.toggle-icon {
+    background-color: var(--primary-light);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    transition: all var(--transition-speed) ease;
+}
+
+.faq-item.active .toggle-icon {
+    background-color: var(--secondary-color);
+    transform: rotate(45deg);
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed) ease, padding var(--transition-speed) ease;
+}
+
+.faq-item.active .faq-answer {
+    padding: 0 20px 20px;
+    max-height: 1000px;
+}
+
+/* Improved FAQ section for mobile */
+@media (max-width: 768px) {
+    .faq-item {
+        margin-bottom: 15px;
+    }
+    
+    .faq-question {
+        padding: 15px;
+    }
+    
+    .faq-answer {
+        padding: 0 15px 15px;
+    }
+    
+    .faq-question h3 {
+        font-size: 1.1rem;
+    }
+}
+
 /* Additional touch-friendly improvements */
 @media (max-width: 576px) {
     .btn {
         padding: 12px 20px;
         /* Make buttons more touch-friendly */
+    }
+    
+    .faq-question {
+        cursor: pointer;
+        /* Enhance tap area */
     }
     
     /* Improve spacing for form elements on mobile */
@@ -1347,8 +1434,13 @@ footer {
     .games-section {
         padding: 50px 0;
     }
-      .loading-screen .ds-console {
+    
+    .loading-screen .ds-console {
         transform: scale(0.8);
+    }
+    
+    .faq-container {
+        padding: 0 20px;
     }
     
     .footer-content {
@@ -1401,9 +1493,16 @@ footer {
         margin: 0 15px;
         padding: 15px;
     }
-      .download-actions {
+    
+    .download-actions {
         flex-direction: column;
         gap: 10px;
+    }
+    
+    /* Better spacing for faq items */
+    .faq-question h3 {
+        font-size: 1rem;
+        max-width: 85%;
     }
     
     /* Game cards for mobile view */
@@ -1513,5 +1612,3 @@ footer {
         width: 280px;
     }
 }
-
-

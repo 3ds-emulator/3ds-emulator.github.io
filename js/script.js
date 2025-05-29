@@ -38,9 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 link.classList.add('active');
             }
         });
-    });
-
-    // Theme toggle functionality
+    });    // Theme toggle functionality
     const themeToggle = document.querySelector('.theme-toggle');
     const body = document.body;
     const themeIcon = themeToggle.querySelector('i');
@@ -64,7 +62,40 @@ document.addEventListener('DOMContentLoaded', () => {
             themeIcon.classList.add('fa-moon');
             localStorage.setItem('theme', 'light');
         }
-    });    // Games carousel data
+    });
+    
+    // Mobile menu functionality
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+        nav.classList.toggle('mobile-nav-open');
+        mobileMenuToggle.classList.toggle('active');
+        
+        const icon = mobileMenuToggle.querySelector('i');
+        if (icon.classList.contains('fa-bars')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (nav.classList.contains('mobile-nav-open')) {
+                nav.classList.remove('mobile-nav-open');
+                mobileMenuToggle.classList.remove('active');
+                const icon = mobileMenuToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    });
+
+    // Games carousel data
     const gamesData = [
         {
             title: "Fire Emblem: Awakening",
@@ -139,38 +170,52 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         carouselContainer.appendChild(gameCard);
-    });
-
-    // Carousel navigation
+    });    // Carousel navigation
     const prevButton = document.querySelector('.carousel-control.prev');
     const nextButton = document.querySelector('.carousel-control.next');
+    const carouselWidth = carouselContainer.getBoundingClientRect().width;
+    
+    // Calculate scroll amount based on screen width
+    const getScrollAmount = () => {
+        if (window.innerWidth <= 576) {
+            return 175; // Width of one card on mobile + margins
+        } else if (window.innerWidth <= 768) {
+            return 215; // Width of one card on tablet + margins
+        } else {
+            return 300; // Width of one card on desktop + margins
+        }
+    };
     
     nextButton.addEventListener('click', () => {
-        carouselContainer.scrollBy({ left: 520, behavior: 'smooth' });
+        carouselContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
     
     prevButton.addEventListener('click', () => {
-        carouselContainer.scrollBy({ left: -520, behavior: 'smooth' });
+        carouselContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
     });
-
-    // FAQ accordion functionality
-    const faqItems = document.querySelectorAll('.faq-item');
     
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        
-        question.addEventListener('click', () => {
-            // Close all other FAQ items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item && otherItem.classList.contains('active')) {
-                    otherItem.classList.remove('active');
-                }
-            });
-            
-            // Toggle the clicked item
-            item.classList.toggle('active');
-        });
-    });
+    // Touch swipe for carousel on mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    carouselContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+      function handleSwipe() {
+        const swipeThreshold = 50; // Minimum distance for a swipe
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe left - next slide
+            carouselContainer.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe right - prev slide
+            carouselContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        }
+    }
 
     // Download button functionality
     const downloadButtons = document.querySelectorAll('.download-btn');

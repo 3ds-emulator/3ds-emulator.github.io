@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>3DS Emulator Hub | Play Nintendo 3DS Games on Your PC</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -32,13 +32,15 @@
                 <img src="images/logo.png" alt="3DS Emulator Hub Logo">
                 <h1>3DS Emulator Hub</h1>
             </div>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#hero" class="active">Home</a></li>
                     <li><a href="#features">Features</a></li>
                     <li><a href="#download">Download</a></li>
                     <li><a href="#games">Games</a></li>
-                    <li><a href="#faq">FAQ</a></li>
                 </ul>
             </nav>
             <div class="theme-toggle">
@@ -231,7 +233,6 @@
             </div>
         </div>
     </section>
-
     <section id="games" class="games-section">
         <div class="section-header">
             <h2>Popular Compatible Games</h2>
@@ -252,79 +253,6 @@
         </div>
     </section>
 
-    <section id="faq" class="faq-section">
-        <div class="section-header">
-            <h2>Frequently Asked Questions</h2>
-            <p>Find answers to common questions about our 3DS emulator</p>
-        </div>
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Is this emulator legal to use?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes, emulators themselves are legal in most countries. However, downloading ROMs of games you
-                        don't own may violate copyright laws. Always ensure you own a legal copy of any game you play.
-                    </p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>How do I configure the controls?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>After launching the emulator, go to Settings > Controls. From there, you can map keyboard keys or
-                        controller buttons to 3DS controls. You can also create and save multiple control profiles.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>My games are running slowly. How can I improve performance?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>Try lowering the resolution settings, disabling enhanced features, or updating your graphics
-                        drivers. Make sure your system meets the minimum requirements. Our wiki has detailed
-                        optimization guides for various systems.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Does the emulator support save states?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes, you can create save states at any point by pressing F5 (or configuring your own hotkey).
-                        Load states using F7. The emulator also supports the native save functionality of the games.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>How do I transfer my save files from a real 3DS?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>You'll need a modded 3DS to extract your save files. Once extracted, place them in the emulator's
-                        save directory. Check our detailed guide in the documentation section for step-by-step
-                        instructions.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-question">
-                    <h3>Is online multiplayer supported?</h3>
-                    <div class="toggle-icon"><i class="fas fa-plus"></i></div>
-                </div>
-                <div class="faq-answer">
-                    <p>Limited online functionality is available in the latest version. Local multiplayer works by
-                        connecting multiple instances of the emulator on the same network. Full online support is still
-                        in development.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -339,7 +267,6 @@
                         <li><a href="#features">Features</a></li>
                         <li><a href="#download">Download</a></li>
                         <li><a href="#games">Games</a></li>
-                        <li><a href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="footer-links-column">
