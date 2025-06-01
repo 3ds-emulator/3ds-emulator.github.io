@@ -215,9 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Swipe right - prev slide
             carouselContainer.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
         }
-    }
-
-    // Download button functionality
+    }    // Download button functionality
     const downloadButtons = document.querySelectorAll('.download-btn');
     const downloadModal = document.getElementById('download-modal');
     const closeModal = document.querySelector('.close-modal');
@@ -228,13 +226,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     downloadButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault();
-            
+            // For direct downloads, we'll show the modal but won't prevent default
+            // so the browser will follow the href link
             const os = button.getAttribute('data-os');
             downloadOS.textContent = os.charAt(0).toUpperCase() + os.slice(1);
             
             downloadModal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            
+            // Don't prevent default - let the browser follow the link
+            // e.preventDefault();
         });
     });
     
@@ -253,6 +254,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     startDownloadBtn.addEventListener('click', () => {
+        // Redirect to the appropriate download link based on the OS
+        const os = downloadOS.textContent.toLowerCase();
+        // if (os === 'windows') {
+        //     window.location.href = 'https://1024terabox.com/s/1CtXk7FQDIfWD3fPJLj9WCA';
+        // } else if (os === 'macos') {
+        //     window.location.href = 'https://1024terabox.com/s/1xg3RNE7VEaXjruRauSQ2OQ';
+        // } else {
+        //     // For Linux or other OS, we'll simulate the download
+        //     simulateDownload();
+        // }
+
         simulateDownload();
     });
 
@@ -262,8 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startDownloadBtn.disabled = false;
         startDownloadBtn.textContent = 'Start Download';
     }
-    
-    function simulateDownload() {
+      function simulateDownload() {
         startDownloadBtn.disabled = true;
         startDownloadBtn.textContent = 'Downloading...';
         
@@ -275,12 +286,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 progress = 100;
                 clearInterval(interval);
                 
-                downloadStatus.textContent = 'Download complete! Starting installation...';
+                downloadStatus.textContent = 'Download complete! Redirecting...';
                 startDownloadBtn.textContent = 'Downloaded';
+                  // Get the OS to determine which URL to redirect to
+                const os = downloadOS.textContent.toLowerCase();
                 
+                // Set a short timeout before redirecting to allow the user to see the complete status
                 setTimeout(() => {
-                    downloadStatus.textContent = 'Thank you for downloading our 3DS Emulator!';
-                }, 1500);
+                    if (os === 'windows') {
+                        window.location.href = 'https://1024terabox.com/s/1CtXk7FQDIfWD3fPJLj9WCA';
+                    } else if (os === 'macos') {
+                        window.location.href = 'https://1024terabox.com/s/1xg3RNE7VEaXjruRauSQ2OQ';
+                    } else if (os === 'android') {
+                        // For Android we'll redirect to the direct download link
+                        window.location.href = 'https://1024terabox.com/s/1Yn7ogscy5amS-oq-DadJCw';
+                    } else {
+                        // For any other OS without a specific link
+                        downloadStatus.textContent = 'Thank you for downloading our 3DS Emulator!';
+                    }
+                }, 1000);
             } else {
                 downloadStatus.textContent = `Downloading... ${Math.round(progress)}%`;
             }
